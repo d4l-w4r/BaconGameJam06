@@ -11,7 +11,7 @@ fpsClock.tick()
 size = [1050,500]
 window = pygame.display.set_mode(size)
 pygame.display.set_caption('Rainbow')
-player_Image = pygame.image.load("assets/Ninja.png")
+player_Image = pygame.image.load("assets/Ninja_small.png")
 player = Player([500, 185], player_Image)
 ##debug print
 print 'Player.img = ', player.image
@@ -25,13 +25,14 @@ while pygame.event.poll().type != QUIT:
         fall = sek*300
 
         keys = pygame.key.get_pressed()
-        if not jump_key_down and (keys[K_w] or keys[K_UP] and player.rect.y):
+        if not jump_key_down and (keys[K_w] or keys[K_UP] and player.rect.y >= 185):
             player.jump(-(fall + 50))
             jump_key_down = True
-        elif jump_key_down and (keys[K_w] or keys[K_UP]):
+        elif jump_key_down and (keys[K_w] or keys [K_UP]):
             pass
         else:
             jump_key_down = False
+        
         if keys[K_d] or keys[K_RIGHT]:
             player.move_x(strecke)
             print("Right", strecke)
