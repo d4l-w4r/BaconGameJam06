@@ -39,10 +39,10 @@ while pygame.event.poll().type != QUIT:
         
         if keys[K_d] or keys[K_RIGHT]:
             player.move_x(1)
-            print("Right", strecke)
+       
         if keys[K_a] or keys[K_LEFT]:
             player.move_x(-1)
-            print("Left", -strecke)
+        
 
 
         window.fill(white)
