@@ -21,7 +21,7 @@ player = Player([500, 300], idleImage)
 ##debug print
 print 'Player.img = ', player.image
 
-def update():
+def update():    
     if player.image is idleImage:
         player.image = wlkcycl[0]
     elif player.image is wlkcycl[0]:
@@ -33,7 +33,7 @@ def update():
 jumped = False
 
 while pygame.event.poll().type != QUIT:
-        clock.tick(10)
+        
 
         keys = pygame.key.get_pressed()
 
@@ -53,6 +53,7 @@ while pygame.event.poll().type != QUIT:
         
         if keys[K_d] or keys[K_RIGHT]:           
             player.move_x(5)
+            clock.tick(10) 
             update() 
 
         if keys[K_a] or keys[K_LEFT]:
