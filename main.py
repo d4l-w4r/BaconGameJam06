@@ -6,22 +6,35 @@ from player import *
 from colors import *
 
 pygame.init()
-fpsClock = pygame.time.Clock()
-fpsClock.tick()
 
+clock = pygame.time.Clock()
 size = [1050,500]
 window = pygame.display.set_mode(size)
 pygame.display.set_caption('Rainbow')
-player_Image = pygame.image.load("assets/ninja_idle.png")
+idleImage = pygame.image.load("assets/ninja_idle.png")
+###experimental
+walk1, walk2 = pygame.image.load("assets/ninja_step1.png"), pygame.image.load("assets/ninja_step2.png")
+wlkcycl = [walk1, walk2]
+###
 background = pygame.image.load("assets/Rainbow.jpg")
-player = Player([500, 300], player_Image)
+player = Player([500, 300], idleImage)
 ##debug print
 print 'Player.img = ', player.image
 
+def update():
+    if player.image is idleImage:
+        player.image = wlkcycl[0]
+    elif player.image is wlkcycl[0]:
+        player.image = wlkcycl[1]
+    else:
+        player.image = wlkcycl[0]
+    
+    
 jumped = False
 
 while pygame.event.poll().type != QUIT:
-        time = fpsClock.tick()
+        clock.tick(10)
+
         keys = pygame.key.get_pressed()
 
         if keys[K_ESCAPE]:
@@ -38,18 +51,12 @@ while pygame.event.poll().type != QUIT:
             player.jump(-30)
             jumped = True
         
-        if keys[K_d] or keys[K_RIGHT]:
-            player.move_x(1)
-<<<<<<< HEAD
-       
-        if keys[K_a] or keys[K_LEFT]:
-            player.move_x(-1)
-        
-=======
-        if keys[K_a] or keys[K_LEFT]:
-            player.move_x(-1)
->>>>>>> 51de456c0f1de922e5fa36421ccab2f8ea5a59b3
+        if keys[K_d] or keys[K_RIGHT]:           
+            player.move_x(5)
+            update() 
 
+        if keys[K_a] or keys[K_LEFT]:
+            player.move_x(-1)
 
         window.fill(white)
 
