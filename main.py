@@ -1,3 +1,4 @@
+#!/usr/bin/env python2.7
 import sys, pygame
 from pygame.locals import *
 
@@ -11,7 +12,7 @@ fpsClock.tick()
 size = [1050,500]
 window = pygame.display.set_mode(size)
 pygame.display.set_caption('Rainbow')
-player_Image = pygame.image.load("assets/Ninja_small.png")
+player_Image = pygame.image.load("assets/ninja_idle.png")
 player = Player([500, 300], player_Image)
 ##debug print
 print 'Player.img = ', player.image
@@ -20,9 +21,6 @@ jumped = False
 
 while pygame.event.poll().type != QUIT:
         time = fpsClock.tick()
-        sek = float(time)/1000
-        strecke = sek*50
-        fall = sek*300
         keys = pygame.key.get_pressed()
 
         if keys[K_ESCAPE]:
