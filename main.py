@@ -12,6 +12,7 @@ size = [1050,500]
 window = pygame.display.set_mode(size)
 pygame.display.set_caption('Rainbow')
 player_Image = pygame.image.load("assets/Ninja_small.png")
+background = pygame.image.load("assets/Rainbow.jpg")
 player = Player([500, 300], player_Image)
 ##debug print
 print 'Player.img = ', player.image
@@ -49,14 +50,15 @@ while pygame.event.poll().type != QUIT:
 
         window.fill(white)
 
-        pygame.draw.rect(window, red, (0, 0, 150, 500))
-        pygame.draw.rect(window, orange, (150, 0, 150, 500))
-        pygame.draw.rect(window, yellow, (300, 0, 150, 500))
-        pygame.draw.rect(window, green, (450, 0, 150, 500))
-        pygame.draw.rect(window, lightblue, (600, 0, 150, 500))
-        pygame.draw.rect(window, darkblue, (750, 0, 150, 500))
-        pygame.draw.rect(window, purple, (900, 0, 150, 500))
-        pygame.draw.rect(window, white, (0, 400, 1050, 100))
+        # pygame.draw.rect(window, red, (0, 0, 150, 500))
+        # pygame.draw.rect(window, orange, (150, 0, 150, 500))
+        # pygame.draw.rect(window, yellow, (300, 0, 150, 500))
+        # pygame.draw.rect(window, green, (450, 0, 150, 500))
+        # pygame.draw.rect(window, lightblue, (600, 0, 150, 500))
+        # pygame.draw.rect(window, darkblue, (750, 0, 150, 500))
+        # pygame.draw.rect(window, purple, (900, 0, 150, 500))
+        # pygame.draw.rect(window, white, (0, 400, 1050, 100))
+        window.blit(background, background.get_rect())
         window.blit(player.image, player.rect)
 
         pygame.display.update()
