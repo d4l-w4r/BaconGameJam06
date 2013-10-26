@@ -1,0 +1,8 @@
+# Compiled stuff #
+#################
+*.pyc
+
+
+# Auto-saves #
+##############
+*.py~
