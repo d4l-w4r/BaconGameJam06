@@ -1,5 +1,6 @@
 import sys, pygame
 from pygame.locals import *
+from obstacle import *
 
 class Player(pygame.sprite.Sprite):
    
@@ -22,7 +23,10 @@ class Player(pygame.sprite.Sprite):
 
     def jump(self, y):
         self.rect.y += y
-
+    
+    #def testCollide(self, obstacle):
+     #   this = self.image.get_rect()
+      #  return this.colliderect(obstacle)
         
 		
     

@@ -3,8 +3,8 @@ import sys, pygame
 from pygame.locals import *
 
 from player import *
+from obstacle import *
 from colors import *
-
 pygame.init()
 
 ##############################
@@ -18,6 +18,10 @@ walk1, walk2, walk1l, walk2l = pygame.image.load("assets/ninja_step1.png"), pyga
 wlkcycl = [walk1, walk2, walk1l, walk2l]
 player = Player([500, 300], walk1)
 pygame.display.set_caption('Rainbow')
+
+### Obstacle trial ###
+obst_img = pygame.image.load("assets/dummy_obstacle.png")
+obstacle = Obstacle([600, 300], obst_img)
 
 ## Not needed right now ##
 #idleImage = pygame.image.load("assets/ninja_idle.png")
@@ -42,10 +46,10 @@ def update():
         else:
             player.image = wlkcycl[0]
     else:
-        if player.image is wlkcycl[2]:
-            player.image = wlkcycl[3]
-        else:
+        if player.image is wlkcycl[3]:
             player.image = wlkcycl[2]
+        else:
+            player.image = wlkcycl[3]
 
 
 ### Game loop ###
@@ -64,16 +68,21 @@ while pygame.event.poll().type != QUIT:
                 jumped = False
 
         
-        if (keys[K_w] or keys[K_UP] and player.rect.y >= 185):
+        if (keys[K_w] or keys[K_UP] and player.rect.y >= 174):
+            clock.tick(24)            
             player.jump(-30)
             jumped = True
         
         if keys[K_d] or keys[K_RIGHT]:
-            face_right = True            
-            player.move_x(15)
-            clock.tick(7)
-            update()
-            print 'DEBUG: Variable face_right: ', face_right
+            if player.rect.colliderect(obstacle.rect):
+                print 'DEBUG: Collision detected.'
+                pass
+            else:            
+                face_right = True            
+                player.move_x(15)
+                clock.tick(7)
+                update()
+                print 'DEBUG: Variable face_right: ', face_right
 
         if keys[K_a] or keys[K_LEFT]:
             face_right = False            
