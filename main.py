@@ -7,37 +7,52 @@ from colors import *
 
 pygame.init()
 
+##############################
+### Loading all the things ###
+##############################
 clock = pygame.time.Clock()
 size = [1050,500]
 window = pygame.display.set_mode(size)
-pygame.display.set_caption('Rainbow')
-#idleImage = pygame.image.load("assets/ninja_idle.png")
-###experimental
-walk1, walk2 = pygame.image.load("assets/ninja_step1.png"), pygame.image.load("assets/ninja_step2.png")
-wlkcycl = [walk1, walk2]
-###
 background = pygame.image.load("assets/Rainbow.jpg")
+walk1, walk2, walk1l, walk2l = pygame.image.load("assets/ninja_step1.png"), pygame.image.load("assets/ninja_step2.png"), pygame.image.load("assets/ninja_step1l.png"), pygame.image.load("assets/ninja_step2l.png")
+wlkcycl = [walk1, walk2, walk1l, walk2l]
 player = Player([500, 300], walk1)
-##debug print
-print 'Player.img = ', player.image
+pygame.display.set_caption('Rainbow')
 
-def update():
-    #if player.image is idleImage:
-     #   player.image = wlkcycl[0]
-    if player.image is wlkcycl[0]:
-        player.image = wlkcycl[1]
-    else:
-        player.image = wlkcycl[0]
-    
-    
+## Not needed right now ##
+#idleImage = pygame.image.load("assets/ninja_idle.png")
+
+
+
+#################################
+### Important state variables ###
+#################################  
 jumped = False
 face_right = True
+print 'DEBUG: Variable jumped initiated to: ', jumped
+print 'DEBUG: Variable face_right initiated to: ', face_right
+
+########################
+### Helper functions ###
+########################
+def update():
+    if face_right:
+        if player.image is wlkcycl[0]:
+            player.image = wlkcycl[1]
+        else:
+            player.image = wlkcycl[0]
+    else:
+        if player.image is wlkcycl[2]:
+            player.image = wlkcycl[3]
+        else:
+            player.image = wlkcycl[2]
 
 
+### Game loop ###
 while pygame.event.poll().type != QUIT:
-        
-
+        window.fill(white)
         keys = pygame.key.get_pressed()
+        
 
         if keys[K_ESCAPE]:
             pygame.quit()
@@ -54,32 +69,19 @@ while pygame.event.poll().type != QUIT:
             jumped = True
         
         if keys[K_d] or keys[K_RIGHT]:
+            face_right = True            
             player.move_x(15)
-            clock.tick(10)
+            clock.tick(7)
             update()
-            if not face_right:
-                player.image = pygame.transform.flip(player.image, True, False) 
-                face_right = True
+            print 'DEBUG: Variable face_right: ', face_right
 
         if keys[K_a] or keys[K_LEFT]:
+            face_right = False            
             player.move_x(-15)
-            clock.tick(10)
+            clock.tick(7)
             update()
-            if face_right:
-                player.image = pygame.transform.flip(player.image, True, False)
-                face_right = False
-
-
-        window.fill(white)
-
-        # pygame.draw.rect(window, red, (0, 0, 150, 500))
-        # pygame.draw.rect(window, orange, (150, 0, 150, 500))
-        # pygame.draw.rect(window, yellow, (300, 0, 150, 500))
-        # pygame.draw.rect(window, green, (450, 0, 150, 500))
-        # pygame.draw.rect(window, lightblue, (600, 0, 150, 500))
-        # pygame.draw.rect(window, darkblue, (750, 0, 150, 500))
-        # pygame.draw.rect(window, purple, (900, 0, 150, 500))
-        # pygame.draw.rect(window, white, (0, 400, 1050, 100))
+            print 'DEBUG: Variable face_right: ', face_right
+        
         window.blit(background, background.get_rect())
         window.blit(player.image, player.rect)
 
