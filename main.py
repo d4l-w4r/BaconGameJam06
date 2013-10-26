@@ -11,26 +11,28 @@ clock = pygame.time.Clock()
 size = [1050,500]
 window = pygame.display.set_mode(size)
 pygame.display.set_caption('Rainbow')
-idleImage = pygame.image.load("assets/ninja_idle.png")
+#idleImage = pygame.image.load("assets/ninja_idle.png")
 ###experimental
 walk1, walk2 = pygame.image.load("assets/ninja_step1.png"), pygame.image.load("assets/ninja_step2.png")
 wlkcycl = [walk1, walk2]
 ###
 background = pygame.image.load("assets/Rainbow.jpg")
-player = Player([500, 300], idleImage)
+player = Player([500, 300], walk1)
 ##debug print
 print 'Player.img = ', player.image
 
-def update():    
-    if player.image is idleImage:
-        player.image = wlkcycl[0]
-    elif player.image is wlkcycl[0]:
+def update():
+    #if player.image is idleImage:
+     #   player.image = wlkcycl[0]
+    if player.image is wlkcycl[0]:
         player.image = wlkcycl[1]
     else:
         player.image = wlkcycl[0]
     
     
 jumped = False
+face_right = True
+
 
 while pygame.event.poll().type != QUIT:
         
@@ -51,13 +53,22 @@ while pygame.event.poll().type != QUIT:
             player.jump(-30)
             jumped = True
         
-        if keys[K_d] or keys[K_RIGHT]:           
-            player.move_x(5)
-            clock.tick(10) 
-            update() 
+        if keys[K_d] or keys[K_RIGHT]:
+            player.move_x(15)
+            clock.tick(10)
+            update()
+            if not face_right:
+                player.image = pygame.transform.flip(player.image, True, False) 
+                face_right = True
 
         if keys[K_a] or keys[K_LEFT]:
-            player.move_x(-1)
+            player.move_x(-15)
+            clock.tick(10)
+            update()
+            if face_right:
+                player.image = pygame.transform.flip(player.image, True, False)
+                face_right = False
+
 
         window.fill(white)
 
