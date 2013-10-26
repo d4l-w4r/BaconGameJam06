@@ -16,17 +16,24 @@ class Player(pygame.sprite.Sprite):
         print('Initialized to x = ', self.rect.x)
         print('Initialized to y = ', self.rect.y)
 
-    def move_x(self, x):       
-        idle = 0        
-        self.rect.x += x
-       
+    def move_x(self, x, obstacle):                 
+        bounds = self.rect.copy()
+        bounds.x += x
+        if not bounds.colliderect(obstacle.rect):
+            self.rect = bounds
+        else:
+            print 'DEBUG: Collision detected.'
 
-    def jump(self, y):
-        self.rect.y += y
+    def jump(self, y, obstacle):
+        bounds = self.rect.copy()
+        bounds.y += y
+        if not bounds.colliderect(obstacle.rect):
+            self.rect.y += y
+        else:   
+            print 'DEBUG: Collision detected.'
     
-    #def testCollide(self, obstacle):
-     #   this = self.image.get_rect()
-      #  return this.colliderect(obstacle)
+    #def testCollide(self, obstacle):  
+     #   return self.rect.colliderect(obstacle)
         
 		
     
