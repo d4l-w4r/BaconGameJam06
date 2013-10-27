@@ -13,14 +13,14 @@ pygame.init()
 clock = pygame.time.Clock()
 size = [1050,500]
 window = pygame.display.set_mode(size)
-background = pygame.image.load("assets/Rainbow.jpg")
+background = pygame.image.load("assets/Rainbow.jpg").convert()
 walk1, walk2, walk1l, walk2l = pygame.image.load("assets/ninja_step1.png"), pygame.image.load("assets/ninja_step2.png"), pygame.image.load("assets/ninja_step1l.png"), pygame.image.load("assets/ninja_step2l.png")
 wlkcycl = [walk1, walk2, walk1l, walk2l]
-player = Player([500, 300], walk1)
+player = Player([300, 300], walk1)
 pygame.display.set_caption('Rainbow')
  
 ### Obstacle trial ###
-obst_img = pygame.image.load("assets/dummy_obstacle.png")
+obst_img = pygame.image.load("assets/dummy_obstacle.png").convert()
 obstacle = Obstacle([600, 374], obst_img)
 
 ## Not needed right now ##

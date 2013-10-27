@@ -7,6 +7,8 @@ class Obstacle(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         self.image = image
         self.rect = self.image.get_rect()
+        self.rect = self.rect.inflate(-9.5,0)
         self.rect.topleft = pos
+        
         
         
