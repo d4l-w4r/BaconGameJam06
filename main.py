@@ -14,19 +14,22 @@ clock = pygame.time.Clock()
 size = [1050,500]
 window = pygame.display.set_mode(size)
 background = pygame.image.load("assets/Rainbow.jpg").convert()
+pygame.display.set_caption('Rainbow')
+
+#####################
+### Set up player ###
+#####################
 walk1, walk2, walk1l, walk2l = pygame.image.load("assets/ninja_step1.png"), pygame.image.load("assets/ninja_step2.png"), pygame.image.load("assets/ninja_step1l.png"), pygame.image.load("assets/ninja_step2l.png")
 wlkcycl = [walk1, walk2, walk1l, walk2l]
 player = Player([300, 300], walk1)
-pygame.display.set_caption('Rainbow')
- 
-### Obstacle trial ###
+
+######################### 
+### Loading obstacles ###
+#########################
 obst_img = pygame.image.load("assets/dummy_obstacle.png").convert()
-obstacle = Obstacle([600, 374], obst_img)
-
-## Not needed right now ##
-#idleImage = pygame.image.load("assets/ninja_idle.png")
-
-
+floor_img = pygame.image.load("assets/dummy_floor.png").convert()
+obstacle = Obstacle([600, 343], obst_img)
+floor = Obstacle([0,426], floor_img)
 
 #################################
 ### Important state variables ###
@@ -51,8 +54,9 @@ def update():
         else:
             player.image = wlkcycl[3]
 
-
+#################
 ### Game loop ###
+#################
 while pygame.event.poll().type != QUIT:
         window.fill(white)
         keys = pygame.key.get_pressed()
@@ -62,7 +66,7 @@ while pygame.event.poll().type != QUIT:
             pygame.quit()
 
         if jumped:
-            player.jump(1, obstacle)
+            player.jump(1, obstacle, floor)
             if player.rect.y >= 300:
                 player.rect.y = 300
                 jumped = False
@@ -70,7 +74,7 @@ while pygame.event.poll().type != QUIT:
         
         if (keys[K_w] or keys[K_UP] and player.rect.y >= 174):
             clock.tick(24)            
-            player.jump(-30, obstacle)
+            player.jump(-30, obstacle, floor)
             jumped = True
         
         if keys[K_d] or keys[K_RIGHT]:           
@@ -90,5 +94,6 @@ while pygame.event.poll().type != QUIT:
         window.blit(background, background.get_rect())
         window.blit(player.image, player.rect)
         window.blit(obstacle.image, obstacle.rect)
+        window.blit(floor.image, floor.rect)
 
         pygame.display.update()
