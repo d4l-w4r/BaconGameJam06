@@ -23,7 +23,7 @@ walk1, walk2, walk1l, walk2l = pygame.image.load("assets/ninja_step1.png"), pyga
 wlkcycl = [walk1, walk2, walk1l, walk2l]
 player = Player([300, 300], walk1)
 
-######################### 
+#########################
 ### Loading obstacles ###
 #########################
 obst_img = pygame.image.load("assets/dummy_obstacle.png").convert()
@@ -33,7 +33,7 @@ floor = Obstacle([0,426], floor_img)
 
 #################################
 ### Important state variables ###
-#################################  
+#################################
 jumped = False
 face_right = True
 print 'DEBUG: Variable jumped initiated to: ', jumped
@@ -54,43 +54,45 @@ def update():
         else:
             player.image = wlkcycl[3]
 
+
 #################
 ### Game loop ###
 #################
 while pygame.event.poll().type != QUIT:
         window.fill(white)
         keys = pygame.key.get_pressed()
-        
+
 
         if keys[K_ESCAPE]:
             pygame.quit()
 
+
         if jumped:
-            player.jump(1, obstacle, floor)
+            player.jump(1, obstacle)
             if player.rect.y >= 300:
                 player.rect.y = 300
                 jumped = False
 
-        
+
         if (keys[K_w] or keys[K_UP] and player.rect.y >= 174):
-            clock.tick(24)            
-            player.jump(-30, obstacle, floor)
+            clock.tick(24)
+            player.jump(-30, obstacle)
             jumped = True
-        
-        if keys[K_d] or keys[K_RIGHT]:           
-            face_right = True            
+
+        if keys[K_d] or keys[K_RIGHT]:
+            face_right = True
             player.move_x(15, obstacle)
             clock.tick(7)
             update()
             print 'DEBUG: Variable face_right: ', face_right
 
         if keys[K_a] or keys[K_LEFT]:
-            face_right = False            
+            face_right = False
             player.move_x(-15, obstacle)
             clock.tick(7)
             update()
             print 'DEBUG: Variable face_right: ', face_right
-        
+
         window.blit(background, background.get_rect())
         window.blit(player.image, player.rect)
         window.blit(obstacle.image, obstacle.rect)

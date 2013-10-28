@@ -31,8 +31,9 @@ class Player(pygame.sprite.Sprite):
             self.rect.y += y
         else:   
             print 'DEBUG: Collision detected.'
-    
-   
-	
+
+    def touchingGround(self, obstacle, floor):
+        return floor.rect.colliderect(self.rect) or obstacle.rect.colliderect(self.rect)
+            
 	
 
