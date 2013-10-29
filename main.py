@@ -71,11 +71,6 @@ def update():
 ### Game loop ###
 #################
 while pygame.event.poll().type != QUIT:
-<<<<<<< HEAD
-        window.fill(white)
-        keys = pygame.key.get_pressed()
-
-=======
     clock.tick(fps)
     window.fill(white)
     keys = pygame.key.get_pressed()
@@ -90,55 +85,23 @@ while pygame.event.poll().type != QUIT:
         player.jump(fps/2.5, obstacle)
     if player.touching(floor) or player.touching(obstacle):
             jumped = False
->>>>>>> 14a18b6e504822934e0f65f288962157962655d3
 
     if (keys[K_w] or keys[K_UP] and not jumped):
         player.jump(-fps*6, obstacle)
         jumped = True
 
-<<<<<<< HEAD
-
-        if jumped:
-            player.jump(1, obstacle)
-            if player.rect.y >= 300:
-                player.rect.y = 300
-                jumped = False
-
-
-        if (keys[K_w] or keys[K_UP] and player.rect.y >= 174):
-            clock.tick(24)
-            player.jump(-30, obstacle)
-            jumped = True
-
-        if keys[K_d] or keys[K_RIGHT]:
-            face_right = True
-            player.move_x(15, obstacle)
-            clock.tick(7)
-            update()
-            print 'DEBUG: Variable face_right: ', face_right
-
-        if keys[K_a] or keys[K_LEFT]:
-            face_right = False
-            player.move_x(-15, obstacle)
-            clock.tick(7)
-            update()
-            print 'DEBUG: Variable face_right: ', face_right
-
-        window.blit(background, background.get_rect())
-        window.blit(player.image, player.rect)
-        window.blit(obstacle.image, obstacle.rect)
-        window.blit(floor.image, floor.rect)
-=======
     if keys[K_d] or keys[K_RIGHT]:
         face_right = True
-        player.move_x(fps/4, obstacle)
+        #player.move_x(fps/4, obstacle)
+        player.movex(4, obstacle)
         update()
         print 'DEBUG: Player image is: ', player.image
         print 'DEBUG: Variable face_right: ', face_right
 
     if keys[K_a] or keys[K_LEFT]:
         face_right = False
-        player.move_x(fps/-4, obstacle)
+        #player.move_x(fps/-4, obstacle)
+        player.movex(-4, obstacle)
         update()
         print 'DEBUG: Player image is: ', player.image
         print 'DEBUG: Variable face_right: ', face_right
@@ -147,6 +110,5 @@ while pygame.event.poll().type != QUIT:
     window.blit(player.image, player.rect)
     window.blit(obstacle.image, obstacle.rect)
     window.blit(floor.image, floor.rect)
->>>>>>> 14a18b6e504822934e0f65f288962157962655d3
 
     pygame.display.update()

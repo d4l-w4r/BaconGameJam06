@@ -31,14 +31,25 @@ class Player(pygame.sprite.Sprite):
             self.rect.y += y
         else:
             print 'DEBUG: Collision detected.'
-<<<<<<< HEAD
-
-    def touchingGround(self, obstacle, floor):
-        return floor.rect.colliderect(self.rect) or obstacle.rect.colliderect(self.rect)
-            
-	
-=======
->>>>>>> 14a18b6e504822934e0f65f288962157962655d3
 
     def touching(self, obj):
         return self.rect.colliderect(obj.rect)
+
+    def movex(self, x, obstacle):
+        bounds = self.rect.copy()
+
+        i = x
+        if i != 0:
+            if i >= 0:
+                bounds.x += i/i
+                print 'DEBUG: i has value: ', i
+                if not bounds.colliderect(obstacle.rect):
+                    self.rect.x = bounds.x
+                    self.movex(x-1, obstacle)
+            elif i <= 0:
+                bounds.x += i/i
+                if not bounds.colliderect(obstacle.rect):
+                    self.rect.x = bounds.x
+                    self.movex(x+1, obstacle)
+        else:
+            print 'DEBUG: x is 0'
