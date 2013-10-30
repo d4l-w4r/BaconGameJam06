@@ -59,7 +59,7 @@ class Player(pygame.sprite.Sprite):
                     self.rect.x = bounds.x
                     self.move_x(x+1, obstacle)
         else:
-            print 'DEBUG: i is 0'
+            print 'DEBUG: i has value 0'
 
     def update_walkcycl(self):
         if self.face_right:
