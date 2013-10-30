@@ -37,7 +37,6 @@ class Player(pygame.sprite.Sprite):
                 self.jumped = False
             else:
                 self.rect.y = boundsFine.y
-                print
             self.jumped = False
         else:
             self.rect.y = bounds.y
@@ -60,7 +59,7 @@ class Player(pygame.sprite.Sprite):
                     self.rect.x = bounds.x
                     self.move_x(x+1, obstacle)
         else:
-            print 'DEBUG: x is 0'
+            print 'DEBUG: i is 0'
 
     def update_walkcycl(self):
         if self.face_right:
@@ -75,7 +74,6 @@ class Player(pygame.sprite.Sprite):
             else:
                 self.image = walkcycle_R[0]
         else:
-            print 'DEBUG: should turn left'
             if self.image is walkcycle_L[0]:
                 self.image = walkcycle_L[1]
             elif self.image is walkcycle_L[1]:
