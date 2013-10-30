@@ -14,9 +14,13 @@ pygame.init()
 clock = pygame.time.Clock()
 size = [1050,500]
 fps = 16
+icon = pygame.image.load("assets/game_icon.png")
+pygame.display.set_icon(icon)
 window = pygame.display.set_mode(size, pygame.DOUBLEBUF | pygame.HWSURFACE)# | pygame.FULLSCREEN )
 background = pygame.image.load("assets/Rainbow.jpg").convert()
-pygame.display.set_caption('Rainbow')
+pygame.display.set_caption('Rainbow Ninja')
+
+
 
 #####################
 ### Set up player ###
