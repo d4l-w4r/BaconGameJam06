@@ -37,7 +37,7 @@ class Player(pygame.sprite.Sprite):
                 self.jumped = False
             else:
                 self.rect.y = boundsFine.y
-            self.jumped = False
+            #self.jumped = False
         else:
             self.rect.y = bounds.y
 
