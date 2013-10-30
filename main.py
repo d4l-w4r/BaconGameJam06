@@ -49,7 +49,7 @@ while pygame.event.poll().type != QUIT:
         print 'DEBUG: Game loop terminated by esc.\nGood Bye.'
         break
 
-    if (keys[K_w] or keys[K_UP]):
+    if (keys[K_w] or keys[K_UP] or keys[K_SPACE]):
         player.jump(obstacle, floor)
 
     if keys[K_d] or keys[K_RIGHT]:
