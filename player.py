@@ -29,7 +29,7 @@ class Player(pygame.sprite.Sprite):
 
     def fall(self, obstacle, floor):
         bounds = boundsRaw = self.rect.copy()
-        boundsRaw.y += 6
+        boundsRaw.y += 8
         if boundsRaw.colliderect(obstacle.rect) or boundsRaw.colliderect(floor.rect):
             boundsFine = bounds = self.rect.copy()
             boundsFine.y += 1
@@ -59,7 +59,7 @@ class Player(pygame.sprite.Sprite):
                     self.rect.x = bounds.x
                     self.move_x(x+1, obstacle)
         else:
-            print 'DEBUG: i has value 0'
+            print 'DEBUG: i has value: 0'
 
     def update_walkcycl(self):
         if self.face_right:
