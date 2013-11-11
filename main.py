@@ -5,26 +5,18 @@ from pygame.locals import *
 from player import *
 from obstacle import *
 from colors import *
+from player_assets import *
+pygame.init()
 
 ##############################
 ### Loading all the things ###
 ##############################
-pygame.init()
-
 clock = pygame.time.Clock()
 size = [1050,500]
 fps = 16
-<<<<<<< HEAD
 window = pygame.display.set_mode(size, pygame.DOUBLEBUF | pygame.HWSURFACE)## | pygame.FULLSCREEN )
-=======
-icon = pygame.image.load("assets/game_icon.png")
-pygame.display.set_icon(icon)
-window = pygame.display.set_mode(size, pygame.DOUBLEBUF | pygame.HWSURFACE)# | pygame.FULLSCREEN )
->>>>>>> 49425377c41b7355a19779322ab659ed9c28a8e5
 background = pygame.image.load("assets/Rainbow.jpg").convert()
-pygame.display.set_caption('Rainbow Ninja')
-
-
+pygame.display.set_caption('Rainbow')
 
 #####################
 ### Set up player ###
@@ -40,7 +32,6 @@ floor_img = pygame.image.load("assets/dummy_floor.png").convert()
 obstacle = Obstacle([600, 343], obst_img)
 floor = Obstacle([0,426], floor_img)
 
-<<<<<<< HEAD
 #################################
 ### Important state variables ###
 #################################
@@ -78,38 +69,43 @@ def update():
         else:
             player.image = walkcycle_L[0]
 
-=======
->>>>>>> 49425377c41b7355a19779322ab659ed9c28a8e5
 #################
 ### Game loop ###
 #################
 while pygame.event.poll().type != QUIT:
     clock.tick(fps)
     window.fill(white)
-    player.fall(obstacle, floor)
-
     keys = pygame.key.get_pressed()
+    #print 'DEBUG: Jumped = ', jumped
 
     if keys[K_ESCAPE]:
+        #pygame.quit()
         print 'DEBUG: Game loop terminated by esc.\nGood Bye.'
         break
 
-    if (keys[K_w] or keys[K_UP]):
-        player.jump(obstacle, floor)
+    if jumped:
+        player.jump(fps/2.5, obstacle)
+    if player.touching(floor) or player.touching(obstacle):
+            jumped = False
+
+    if (keys[K_w] or keys[K_UP] and not jumped):
+        player.jump(-fps*6, obstacle)
+        jumped = True
 
     if keys[K_d] or keys[K_RIGHT]:
-        player.face_right = True
-        player.move_x(4, obstacle)
-        player.update_walkcycl()
-        print 'DEBUG: Variable face_right: ', player.face_right
+        face_right = True
+        player.move_x(fps/4, obstacle)
+        update()
+        print 'DEBUG: Player image is: ', player.image
+        print 'DEBUG: Variable face_right: ', face_right
 
     if keys[K_a] or keys[K_LEFT]:
-        player.face_right = False
-        player.move_x(-4, obstacle)
-        player.update_walkcycl()
-        print 'DEBUG: Variable face_right: ', player.face_right
+        face_right = False
+        player.move_x(fps/-4, obstacle)
+        update()
+        print 'DEBUG: Player image is: ', player.image
+        print 'DEBUG: Variable face_right: ', face_right
 
-    ### Draw everything
     window.blit(background, background.get_rect())
     window.blit(player.image, player.rect)
     window.blit(obstacle.image, obstacle.rect)
