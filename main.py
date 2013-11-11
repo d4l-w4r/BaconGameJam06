@@ -14,9 +14,13 @@ pygame.init()
 clock = pygame.time.Clock()
 size = [1050,500]
 fps = 16
+<<<<<<< HEAD
+window = pygame.display.set_mode(size, pygame.DOUBLEBUF | pygame.HWSURFACE)## | pygame.FULLSCREEN )
+=======
 icon = pygame.image.load("assets/game_icon.png")
 pygame.display.set_icon(icon)
 window = pygame.display.set_mode(size, pygame.DOUBLEBUF | pygame.HWSURFACE)# | pygame.FULLSCREEN )
+>>>>>>> 49425377c41b7355a19779322ab659ed9c28a8e5
 background = pygame.image.load("assets/Rainbow.jpg").convert()
 pygame.display.set_caption('Rainbow Ninja')
 
@@ -25,6 +29,7 @@ pygame.display.set_caption('Rainbow Ninja')
 #####################
 ### Set up player ###
 #####################
+#Loading player images is done in player_assets
 player = Player([300, 300], walkcycle_R[0])
 
 #########################
@@ -35,6 +40,46 @@ floor_img = pygame.image.load("assets/dummy_floor.png").convert()
 obstacle = Obstacle([600, 343], obst_img)
 floor = Obstacle([0,426], floor_img)
 
+<<<<<<< HEAD
+#################################
+### Important state variables ###
+#################################
+jumped = False
+face_right = True
+print 'DEBUG: Variable jumped initiated to: ', jumped
+print 'DEBUG: Variable face_right initiated to: ', face_right
+
+########################
+### Helper functions ###
+########################
+def update():
+    if face_right:
+        if player.image is walkcycle_R[0]:
+            player.image = walkcycle_R[1]
+        elif player.image is walkcycle_R[1]:
+            player.image = walkcycle_R[2]
+        elif player.image is walkcycle_R[2]:
+            player.image = walkcycle_R[3]
+        elif player.image is walkcycle_R[3]:
+            player.image = walkcycle_R[4]
+        else:
+            player.image = walkcycle_R[0]
+    else:
+        if player.image is walkcycle_L[0]:
+            player.image = walkcycle_L[1]
+        elif player.image is walkcycle_L[1]:
+            player.image = walkcycle_L[2]
+        elif player.image is walkcycle_L[2]:
+            player.image = walkcycle_L[3]
+        elif player.image is walkcycle_L[3]:
+            player.image = walkcycle_L[4]
+        elif player.image is walkcycle_L[4]:
+            player.image = walkcycle_L[0]
+        else:
+            player.image = walkcycle_L[0]
+
+=======
+>>>>>>> 49425377c41b7355a19779322ab659ed9c28a8e5
 #################
 ### Game loop ###
 #################
