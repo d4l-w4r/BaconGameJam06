@@ -14,13 +14,14 @@ pygame.init()
 clock = pygame.time.Clock()
 size = [1050,500]
 fps = 16
-window = pygame.display.set_mode(size, pygame.DOUBLEBUF | pygame.HWSURFACE)# | pygame.FULLSCREEN )
+window = pygame.display.set_mode(size, pygame.DOUBLEBUF | pygame.HWSURFACE)## | pygame.FULLSCREEN )
 background = pygame.image.load("assets/Rainbow.jpg").convert()
 pygame.display.set_caption('Rainbow')
 
 #####################
 ### Set up player ###
 #####################
+#Loading player images is done in player_assets
 player = Player([300, 300], walkcycle_R[0])
 
 #########################
@@ -63,6 +64,8 @@ def update():
             player.image = walkcycle_L[3]
         elif player.image is walkcycle_L[3]:
             player.image = walkcycle_L[4]
+        elif player.image is walkcycle_L[4]:
+            player.image = walkcycle_L[0]
         else:
             player.image = walkcycle_L[0]
 
