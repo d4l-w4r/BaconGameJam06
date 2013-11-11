@@ -83,6 +83,7 @@ while pygame.event.poll().type != QUIT:
         print 'DEBUG: Game loop terminated by esc.\nGood Bye.'
         break
 
+<<<<<<< HEAD
     if jumped:
         player.jump(fps/2.5, obstacle)
     if player.touching(floor) or player.touching(obstacle):
@@ -91,6 +92,10 @@ while pygame.event.poll().type != QUIT:
     if (keys[K_w] or keys[K_UP] and not jumped):
         player.jump(-fps*6, obstacle)
         jumped = True
+=======
+    if (keys[K_w] or keys[K_UP] or keys[K_SPACE]):
+        player.jump(obstacle, floor)
+>>>>>>> 8b27334ad5b6ed104326427a733fbd3da8f10231
 
     if keys[K_d] or keys[K_RIGHT]:
         face_right = True
